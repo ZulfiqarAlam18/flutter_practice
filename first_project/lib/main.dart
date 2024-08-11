@@ -46,7 +46,7 @@ class _AppState extends State<Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome Back'),
+        title: const Text('First flutter App'),
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
@@ -54,26 +54,23 @@ class _AppState extends State<Screen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text Field for number input
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: _controller,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: 'Enter a number',
+                  labelText: 'Enter a integer',
                   border: OutlineInputBorder(),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            // Button to check if the number is even or odd
             ElevatedButton(
               onPressed: _checkEvenOdd,
               child: const Text('Check Even or Odd'),
             ),
             const SizedBox(height: 20),
-            // Output field to display the result
             Text(
               _result,
               style: const TextStyle(fontSize: 18),
