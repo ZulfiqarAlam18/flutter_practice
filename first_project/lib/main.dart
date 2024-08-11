@@ -62,7 +62,7 @@ class _AppState extends State<Screen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _showName,
-              child: Text(name,style: TextStyle(color: Colors.green,fontSize: 16),),
+              child: Text(name,style: TextStyle(color: Colors.amber,fontSize: 16),),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
