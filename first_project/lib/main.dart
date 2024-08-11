@@ -24,18 +24,21 @@ class Screen extends StatefulWidget {
 }
 
 class _AppState extends State<Screen> {
-  String name = "Zulfiqar Alam";
-  String rollNo = "21sw018";
+  final TextEditingController _controller = TextEditingController();
+  String _result = '';
 
-  void _showName() {
+  void _checkEvenOdd() {
     setState(() {
-      name = "Zulfiqar"; // Update the name when button is pressed
-    });
-  }
-
-  void _showRollNo() {
-    setState(() {
-      rollNo = "21sw018"; // Update the roll number when button is pressed
+      int? number = int.tryParse(_controller.text);
+      if (number == null) {
+        _result = 'Please enter a valid number';
+      } else {
+        if (number % 2 == 0) {
+          _result = 'The number $number is Even';
+        } else {
+          _result = 'The number $number is Odd';
+        }
+      }
     });
   }
 
@@ -43,31 +46,37 @@ class _AppState extends State<Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "My First App",
-            style: TextStyle(color: Colors.black, fontSize: 32),
-          ),
-        ),
+        title: const Text('Welcome Back'),
+        centerTitle: true,
         backgroundColor: Colors.grey,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Press Any Button",
-              style: TextStyle(color: Colors.grey, fontSize: 24),
+            // Text Field for number input
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _controller,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Enter a number',
+                  border: OutlineInputBorder(),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
+            // Button to check if the number is even or odd
             ElevatedButton(
-              onPressed: _showName,
-              child: Text(name,style: TextStyle(color: Colors.amber,fontSize: 16),),
+              onPressed: _checkEvenOdd,
+              child: const Text('Check Even or Odd'),
             ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _showRollNo,
-              child: Text(rollNo, style: TextStyle(color: Colors.amber,fontSize: 16)),
+            const SizedBox(height: 20),
+            // Output field to display the result
+            Text(
+              _result,
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),
