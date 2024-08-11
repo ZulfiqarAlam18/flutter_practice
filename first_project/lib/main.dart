@@ -44,7 +44,10 @@ class _AppState extends State<Screen> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("My First App"),
+          child: Text(
+            "My First App",
+            style: TextStyle(color: Colors.black, fontSize: 32),
+          ),
         ),
         backgroundColor: Colors.grey,
       ),
@@ -52,16 +55,19 @@ class _AppState extends State<Screen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Press Any Button"),
+            const Text(
+              "Press Any Button",
+              style: TextStyle(color: Colors.grey, fontSize: 24),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _showName,
-              child: Text(name),
+              child: Text(name,style: TextStyle(color: Colors.green,fontSize: 16),),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _showRollNo,
-              child: Text(rollNo),
+              child: Text(rollNo, style: TextStyle(color: Colors.amber,fontSize: 16)),
             ),
           ],
         ),
