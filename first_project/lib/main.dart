@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interactive App',
-      home: MyHomePage(),
+    return const MaterialApp(
+      title: 'Demo',
+      home: Screen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class Screen extends StatefulWidget {
+  const Screen({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _AppState createState() => _AppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String _displayText = "Hello, World!";
+class _AppState extends State<Screen> {
+  String name = "Zulfiqar Alam";
+  String rollNo = "21sw018";
 
-  void _changeText() {
+  void _showName() {
     setState(() {
-      _displayText = "You pressed the button!";
+      name = "Zulfiqar"; // Update the name when button is pressed
+    });
+  }
+
+  void _showRollNo() {
+    setState(() {
+      rollNo = "21sw018"; // Update the roll number when button is pressed
     });
   }
 
@@ -33,22 +44,24 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Welcome to My App'),
+          child: Text("My First App"),
         ),
         backgroundColor: Colors.grey,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              _displayText,
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 20),
+          children: [
+            const Text("Press Any Button"),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _changeText,
-              child: Text('Press Me'),
+              onPressed: _showName,
+              child: Text(name),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _showRollNo,
+              child: Text(rollNo),
             ),
           ],
         ),
