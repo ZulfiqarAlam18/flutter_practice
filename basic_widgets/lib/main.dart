@@ -20,6 +20,61 @@ class HomeScreen extends StatefulWidget {
 }
 
 class AppState extends State<HomeScreen> {
+  final TextEditingController f1 = TextEditingController();
+  final TextEditingController f2 = TextEditingController();
+  String first_name = "";
+  String last_name = "";
+  String f = "";
+  String l = "";
+
+  void _dataEntry(){
+    setState(() {
+    first_name = f1.text;
+    last_name = f2.text;
+    });
+  }
+
+  void _showFirst(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("First Name"),
+          content: Text(f),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  void _showLast(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Last Name"),
+          content: Text(l),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,21 +95,42 @@ class AppState extends State<HomeScreen> {
               ),
             ),
           ),
-          backgroundColor: Colors.grey,elevation: 16,actionsIconTheme: IconThemeData(
-
-        ),
+          backgroundColor: Colors.grey,
+          elevation: 16,
+          actionsIconTheme: IconThemeData(),
         ),
         body: Center(
             child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
 
-              Text("Hello Bachu"),
-                Text("tou Kase hu App log"),
-
-            ],
-          )
-        ),
+           const  SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: f1,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'Enter first name'),
+            ),
+           const  SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: f2,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'Enter Last name'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FloatingActionButton(onPressed: _dataEntry,child: const  Icon(Icons.check),),
+            const SizedBox(height: 40,),
+            ElevatedButton(onPressed:() => _showFirst(context), child: const Text("View First Name")),
+            ElevatedButton(onPressed:() =>_showLast(context), child: const Text("View Last  Name")),
+            //Text(f),
+           // Text(l)
+          ],
+        )),
       ),
     );
   }
