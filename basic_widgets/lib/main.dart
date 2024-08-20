@@ -40,7 +40,7 @@ class AppState extends State<HomeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("First Name"),
-          content: Text(f),
+          content: Text(first_name),
           actions: [
             TextButton(
               onPressed: () {
@@ -59,7 +59,7 @@ class AppState extends State<HomeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Last Name"),
-          content: Text(l),
+          content: Text(last_name),
           actions: [
             TextButton(
               onPressed: () {
@@ -83,13 +83,13 @@ class AppState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Center(
             child: Text(
-              "Happy Happy",
+              "World of Widgets",
               style: TextStyle(
                 fontSize: 32,
                 color: Colors.amber,
                 backgroundColor: Colors.black,
                 wordSpacing: 8,
-                letterSpacing: 8,
+                //letterSpacing: 8,
                 fontWeight: FontWeight.bold,
                 textBaseline: TextBaseline.alphabetic,
               ),
@@ -123,7 +123,8 @@ class AppState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            FloatingActionButton(onPressed: _dataEntry,child: const  Icon(Icons.check),),
+           // FloatingActionButton(onPressed: _dataEntry,child: const  Icon(Icons.check),),
+            TextButton(onPressed: _dataEntry, child: Text('Save Data')),
             const SizedBox(height: 40,),
             ElevatedButton(onPressed:() => _showFirst(context), child: const Text("View First Name")),
             ElevatedButton(onPressed:() =>_showLast(context), child: const Text("View Last  Name")),
