@@ -27,10 +27,10 @@ class AppState extends State<HomeScreen> {
   String f = "";
   String l = "";
 
-  void _dataEntry(){
+  void _dataEntry() {
     setState(() {
-    first_name = f1.text;
-    last_name = f2.text;
+      first_name = f1.text;
+      last_name = f2.text;
     });
   }
 
@@ -53,24 +53,22 @@ class AppState extends State<HomeScreen> {
       },
     );
   }
-  void _showLast(BuildContext context) {
+
+  void showLastName(BuildContext context) {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Last Name"),
-          content: Text(last_name),
-          actions: [
-            TextButton(
-              onPressed: () {
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("last Name"),
+            content: Text(last_name),
+            actions: [
+
+              FloatingActionButton(onPressed: (){
                 Navigator.of(context).pop();
-              },
-              child: const Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
+              },child: const Text("Close"),)
+            ],
+          );
+        });
   }
 
 
@@ -86,8 +84,8 @@ class AppState extends State<HomeScreen> {
               "World of Widgets",
               style: TextStyle(
                 fontSize: 32,
-                color: Colors.amber,
-                backgroundColor: Colors.black,
+                color: Colors.white,
+                // backgroundColor: Colors.black,
                 wordSpacing: 8,
                 //letterSpacing: 8,
                 fontWeight: FontWeight.bold,
@@ -103,8 +101,7 @@ class AppState extends State<HomeScreen> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-           const  SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextField(
@@ -112,7 +109,7 @@ class AppState extends State<HomeScreen> {
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Enter first name'),
             ),
-           const  SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextField(
@@ -123,62 +120,23 @@ class AppState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-           // FloatingActionButton(onPressed: _dataEntry,child: const  Icon(Icons.check),),
-            TextButton(onPressed: _dataEntry, child: Text('Save Data')),
-            const SizedBox(height: 40,),
-            ElevatedButton(onPressed:() => _showFirst(context), child: const Text("View First Name")),
-            ElevatedButton(onPressed:() =>_showLast(context), child: const Text("View Last  Name")),
+            // FloatingActionButton(onPressed: _dataEntry,child: const  Icon(Icons.check),),
+            TextButton(onPressed: _dataEntry, child: const Text('Save Data'),),
+            const SizedBox(
+              height: 40,
+            ),
+
+            ElevatedButton(
+                onPressed: () => _showFirst(context),
+                child: const Text("View First Name")),
+            ElevatedButton(
+                onPressed: () => showLastName(context),
+                child: const Text("View Last  Name")),
             //Text(f),
-           // Text(l)
+            // Text(l)
           ],
         )),
       ),
     );
   }
 }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   int _counter = 0;
-//
-//   void _incrementCounter() {
-//     setState(() {
-//
-//       _counter++;
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//
-//         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-//
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         // Center is a layout widget. It takes a single child and positions it
-//         // in the middle of the parent.
-//         child: Column(
-//
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '$_counter',
-//               style: Theme.of(context).textTheme.headlineMedium,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }
