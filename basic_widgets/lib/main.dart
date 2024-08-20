@@ -8,30 +8,39 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'My App',
-      home: Center(
-        child: Text(
-          'Welcome home',
-          style: TextStyle(fontSize: 32, color: Colors.grey),
-        ),
-      ),
-    );
+    return const MaterialApp(title: 'My App', home: HomeScreen());
   }
 }
-class HomeScreen extends StatefulWidget{
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
   AppState createState() => AppState();
 }
 
-class AppState extends State<HomeScreen>{
-  Widget build(BuildContext context){
+class AppState extends State<HomeScreen> {
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
       home: Scaffold(
-
+        appBar: AppBar(
+          title: const Center(
+            child: Text(
+              "Happy Happy",
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.greenAccent,
+                backgroundColor: Colors.black,
+                wordSpacing: 8,
+                letterSpacing: 8,
+                fontWeight: FontWeight.bold,
+                textBaseline: TextBaseline.alphabetic,
+              ),
+            ),
+          ),
+          backgroundColor: Colors.grey,
+        ),
       ),
     );
   }
