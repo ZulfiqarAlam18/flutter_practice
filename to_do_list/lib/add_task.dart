@@ -1,14 +1,50 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget{
+  const AddTaskScreen({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<AddTaskScreen>{
+  final TextEditingController controller  = TextEditingController();
+  String task = "";
+
+  void addTask(){
+    task = controller.text;
+    if(task.isNotEmpty){
+     // print('Task added');
+    }
+  }
+  @override
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Task'),
+        title: const Center(
+          child: Text('Add Your Tasks Here'),
+
+        ),
+        backgroundColor: Colors.grey,
       ),
-      body: Center(
-        child: Text('This is where you add tasks.'),
+      backgroundColor: Colors.teal,
+      body: Padding(
+        padding: const EdgeInsets.all(16.9),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter Task Description'
+              ),
+            ),
+            SizedBox(height: 20,),
+            ElevatedButton(onPressed: addTask, child: const Text('Add Task')),
+            Text(task),
+          ],
+        ),
       ),
     );
   }
