@@ -35,51 +35,78 @@ class MyAppState extends State <Home> {
       backgroundColor: Colors.white,
       body: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(32.0),
-            margin: EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.lightGreen,
-              borderRadius: BorderRadius.circular(24.0),
-            ),
-            child: Text('Container 1'),
+          Column(
+            children: [
+
+              Container(
+                padding: EdgeInsets.all(24.0),
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('row 1 column 1'),
+              ),
+              Container(
+                padding: EdgeInsets.all(24.0),
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('row 1 column 2'),
+              ),
+              Container(
+                padding: EdgeInsets.all(32.0),
+                margin: EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('Container 1'),
+              ),
+
+
+            ],
           ),
-          Container(
-            padding: EdgeInsets.all(32.0),
-            margin: EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.lightGreen,
-              borderRadius: BorderRadius.circular(24.0),
-            ),
-            child: Text('Container 2'),
+          Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(24.0),
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('row 2 column 1'),
+              ),
+
+              Container(
+                padding: EdgeInsets.all(24.0),
+                margin: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('row 2 column 2'),
+              ),
+              Container(
+                padding: EdgeInsets.all(32.0),
+                margin: EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                child: Text('Container 1'),
+              ),
+
+
+            ],
           ),
         ],
 
       ),
-      //
-      // body: Column(
-      //   children: [
-      //     Container(
-      //       padding: EdgeInsets.all(32.0),
-      //       margin: EdgeInsets.all(24.0),
-      //       decoration: BoxDecoration(
-      //         color: Colors.lightGreen,
-      //         borderRadius: BorderRadius.circular(24.0),
-      //       ),
-      //       child: Text('Container 1'),
-      //     ),
-      //     Container(
-      //       padding: EdgeInsets.all(32.0),
-      //       margin: EdgeInsets.all(24.0),
-      //       decoration: BoxDecoration(
-      //         color: Colors.lightGreen,
-      //         borderRadius: BorderRadius.circular(24.0),
-      //       ),
-      //       child: Text('Container 2'),
-      //     ),
-      //   ],
-      //
-      // ),
+
     );
   }
 }
