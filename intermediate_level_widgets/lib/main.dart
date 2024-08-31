@@ -33,69 +33,53 @@ class MyAppState extends State <Home> {
           backgroundColor: Colors.teal,
         ),
       backgroundColor: Colors.white,
-      body: Column(
+      body: Row(
         children: [
           Container(
             padding: EdgeInsets.all(32.0),
             margin: EdgeInsets.all(24.0),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.lightGreen,
               borderRadius: BorderRadius.circular(24.0),
             ),
-            child: const Text('Container 1',style: TextStyle(fontSize: 24,color: Colors.black),),
+            child: Text('Container 1'),
           ),
           Container(
             padding: EdgeInsets.all(32.0),
             margin: EdgeInsets.all(24.0),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.lightGreen,
               borderRadius: BorderRadius.circular(24.0),
             ),
-            child: const Text('Container 2',style: TextStyle(fontSize: 24,color: Colors.black),),
+            child: Text('Container 2'),
           ),
-          Container(
-            padding: EdgeInsets.all(32.0),
-            margin: EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(24.0),
-            ),
-            child: const Text('Container 3',style: TextStyle(fontSize: 24,color: Colors.black),),
-          ),
-          Container(
-            padding: EdgeInsets.all(32.0),
-            margin: EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(24.0),
-            ),
-            child: const Text('Container 4',style: TextStyle(fontSize: 24,color: Colors.black),),
-          ),
-          Container(
-            padding: EdgeInsets.all(32.0),
-            margin: EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(24.0),
-            ),
-            child: const Text('Container 5',style: TextStyle(fontSize: 24,color: Colors.black),),
-          ),
-
-
-
         ],
 
       ),
+      //
+      // body: Column(
+      //   children: [
+      //     Container(
+      //       padding: EdgeInsets.all(32.0),
+      //       margin: EdgeInsets.all(24.0),
+      //       decoration: BoxDecoration(
+      //         color: Colors.lightGreen,
+      //         borderRadius: BorderRadius.circular(24.0),
+      //       ),
+      //       child: Text('Container 1'),
+      //     ),
+      //     Container(
+      //       padding: EdgeInsets.all(32.0),
+      //       margin: EdgeInsets.all(24.0),
+      //       decoration: BoxDecoration(
+      //         color: Colors.lightGreen,
+      //         borderRadius: BorderRadius.circular(24.0),
+      //       ),
+      //       child: Text('Container 2'),
+      //     ),
+      //   ],
+      //
+      // ),
     );
   }
 }
-
-// Container(
-// padding: EdgeInsets.all(16.0),
-// margin: EdgeInsets.all(16.0),
-// decoration: BoxDecoration(
-// color: Colors.blue,
-// borderRadius: BorderRadius.circular(8.0),
-// ),
-// child: Text('This is a Container'),
-// );
