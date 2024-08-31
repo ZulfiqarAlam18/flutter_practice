@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -70,6 +69,10 @@ class MyPracticeApp extends State<Practice> {
     }
   }
 
+
+
+
+
   Widget build(BuildContext Context) {
     return Scaffold(
       appBar: AppBar(
@@ -91,3 +94,22 @@ class MyPracticeApp extends State<Practice> {
     );
   }
 }
+
+
+// Creating classes in dart
+class Uni {
+  String name;
+
+  //constructor
+  Uni(this.name);
+
+  //print method
+  void print_name() {
+    print('$name');
+  }
+}
+// void main(){
+//   Uni obj = Uni('Muet');
+//   obj.print_name();
+//
+// }
