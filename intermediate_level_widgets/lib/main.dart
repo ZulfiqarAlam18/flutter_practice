@@ -1,115 +1,101 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyWidgets());
+void main(){
+  runApp(const MyApp());
 }
 
-class MyWidgets extends StatelessWidget {
-  const MyWidgets({super.key});
+class MyApp extends StatelessWidget{
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Simple Widgets',
-      home: Practice(),
+    return MaterialApp(
+      title: 'First App',
+      home: Home(),
     );
   }
 }
 
-class Practice extends StatefulWidget {
-  const Practice({super.key});
-  @override
-  MyPracticeApp createState() => MyPracticeApp();
+class Home extends StatefulWidget{
+  const Home({super.key});
+
+  MyAppState createState() => MyAppState();
 }
 
-class MyPracticeApp extends State<Practice> {
+class MyAppState extends State <Home> {
 
-  // Var , Const and final key words
-  var name = "Zulfiqar";
-  final caste = "Jamali";
-  static const age = "18";
-
-  // Data types in flutter/dart
-  final int a = 10;
-  final String b = 'c';
-  final double c = 2.4;
-  final bool value = true;
-  final List <String> data = ["fakhar","sajjad","Zulfiqar"];
-  final Map <String, String> data1 = {
-    "name":"fakhar",
-    "caste":"Laghari",
-    "Roll No":"21sw013"
-  };
-
-  // Switch Statement
-  void day_name(day){
-    switch (day){
-      case 1:
-        name = 'Mon';
-        break;
-      case 2:
-        name = 'Tues';
-        break;
-      case 3:
-        name = 'Wed';
-        break;
-      case 4:
-        name = 'Thrus';
-        break;
-      case 5:
-        name = 'Fri';
-        break;
-      case 6:
-        name = 'Sat';
-        break;
-      case 7:
-        name = 'Sun';
-        break;
-      default:
-        name = 'Invalid Response';
-    }
-  }
-
-
-
-
-
-  Widget build(BuildContext Context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('Practice'),
-        ),
-        backgroundColor: Colors.teal,
-      ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(b),
+        appBar: AppBar(
+          title: Center(
+            child: Text('Practice'),
 
-          ],
+          ),
+          backgroundColor: Colors.teal,
         ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(32.0),
+            margin: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            child: const Text('Container 1',style: TextStyle(fontSize: 24,color: Colors.black),),
+          ),
+          Container(
+            padding: EdgeInsets.all(32.0),
+            margin: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            child: const Text('Container 2',style: TextStyle(fontSize: 24,color: Colors.black),),
+          ),
+          Container(
+            padding: EdgeInsets.all(32.0),
+            margin: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            child: const Text('Container 3',style: TextStyle(fontSize: 24,color: Colors.black),),
+          ),
+          Container(
+            padding: EdgeInsets.all(32.0),
+            margin: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            child: const Text('Container 4',style: TextStyle(fontSize: 24,color: Colors.black),),
+          ),
+          Container(
+            padding: EdgeInsets.all(32.0),
+            margin: EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+            child: const Text('Container 5',style: TextStyle(fontSize: 24,color: Colors.black),),
+          ),
+
+
+
+        ],
+
       ),
     );
   }
 }
 
-
-// Creating classes in dart
-class Uni {
-  String name;
-
-  //constructor
-  Uni(this.name);
-
-  //print method
-  void print_name() {
-    print('$name');
-  }
-}
-// void main(){
-//   Uni obj = Uni('Muet');
-//   obj.print_name();
-//
-// }
+// Container(
+// padding: EdgeInsets.all(16.0),
+// margin: EdgeInsets.all(16.0),
+// decoration: BoxDecoration(
+// color: Colors.blue,
+// borderRadius: BorderRadius.circular(8.0),
+// ),
+// child: Text('This is a Container'),
+// );
