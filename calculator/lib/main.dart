@@ -1,136 +1,164 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(CalculatorApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Updated Calculator',
-      home: Home(),
+    return MaterialApp(
+      title: 'Calculator',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: CalculatorScreen(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
+class CalculatorScreen extends StatefulWidget {
   @override
-  _AppState createState() => _AppState();
+  _CalculatorScreenState createState() => _CalculatorScreenState();
 }
 
-class _AppState extends State<Home> {
-  final TextEditingController obj1 = TextEditingController();
-  final TextEditingController obj2 = TextEditingController();
-  final TextEditingController obj3 = TextEditingController();
-  String result = "No Result";
+class _CalculatorScreenState extends State<CalculatorScreen> {
+  String output = "0";
+  String _output = "0";
+  double num1 = 0.0;
+  double num2 = 0.0;
+  String operand = "";
 
-  void showResult() {
-    setState(() {
-      int? n1 = int.tryParse(obj1.text);
-      int? n2 = int.tryParse(obj2.text);
-      String op = obj3.text;
-
-      if (n1 == null || n2 == null || op.isEmpty) {
-        result = "Invalid Input";
+  buttonPressed(String buttonText) {
+    if (buttonText == "CLEAR") {
+      _output = "0";
+      num1 = 0.0;
+      num2 = 0.0;
+      operand = "";
+    } else if (buttonText == "+" || buttonText == "-" || buttonText == "/" || buttonText == "X") {
+      num1 = double.parse(output);
+      operand = buttonText;
+      _output = "0";
+    } else if (buttonText == ".") {
+      if (_output.contains(".")) {
         return;
+      } else {
+        _output = _output + buttonText;
+      }
+    } else if (buttonText == "=") {
+      num2 = double.parse(output);
+
+      if (operand == "+") {
+        _output = (num1 + num2).toString();
+      } else if (operand == "-") {
+        _output = (num1 - num2).toString();
+      } else if (operand == "X") {
+        _output = (num1 * num2).toString();
+      } else if (operand == "/") {
+        if (num2 != 0) {
+          _output = (num1 / num2).toString();
+        } else {
+          _output = "Error";
+        }
       }
 
-      switch (op) {
-        case "+":
-          result = (n1 + n2).toString();
-          break;
-        case "-":
-          result = (n1 - n2).toString();
-          break;
-        case "*":
-          result = (n1 * n2).toString();
-          break;
-        case "/":
-          if (n2 == 0) {
-            result = "Cannot divide by zero";
-          } else {
-            result = (n1 / n2).toStringAsFixed(2); // limit to 2 decimal places
-          }
-          break;
-        default:
-          result = "Invalid Operator";
-      }
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(result),
-        duration: const Duration(seconds: 5),
-      ));
+      num1 = 0.0;
+      num2 = 0.0;
+      operand = "";
+    } else {
+      _output = _output + buttonText;
+    }
+
+    setState(() {
+      output = _output;
     });
+  }
+
+  Widget buildButton(String buttonText) {
+    return Expanded(
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.all(24.0),
+          side: BorderSide(color: Colors.blue, width: 1.0),
+        ),
+        child: Text(
+          buttonText,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        onPressed: () => buttonPressed(buttonText),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-            child: Text(
-          'Updated Calculator App',
-          style: TextStyle(),
-        )),
-        backgroundColor: Colors.indigoAccent,
+        title: Text('Calculator'),
       ),
-      backgroundColor: Colors.purpleAccent,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 60),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: obj1,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Enter 1st Number',
-                  border: OutlineInputBorder(),
-                ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+            child: Text(
+              output,
+              style: TextStyle(
+                fontSize: 48.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: obj3,
-                decoration: const InputDecoration(
-                  labelText: 'Enter Operator (+, -, *, /)',
-                  border: OutlineInputBorder(),
-                ),
+          ),
+          Expanded(
+            child: Divider(),
+          ),
+          Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  buildButton("7"),
+                  buildButton("8"),
+                  buildButton("9"),
+                  buildButton("/"),
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: obj2,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Enter 2nd Number',
-                  border: OutlineInputBorder(),
-                  
-
-                ),
+              Row(
+                children: <Widget>[
+                  buildButton("4"),
+                  buildButton("5"),
+                  buildButton("6"),
+                  buildButton("X"),
+                ],
               ),
-            ),
-            ElevatedButton(
-              onPressed: showResult,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigoAccent,
+              Row(
+                children: <Widget>[
+                  buildButton("1"),
+                  buildButton("2"),
+                  buildButton("3"),
+                  buildButton("-"),
+                ],
               ),
-              child: const Text(
-                'Press to See Result',
-                style: TextStyle(fontSize: 20,color: Colors.black),
+              Row(
+                children: <Widget>[
+                  buildButton("."),
+                  buildButton("0"),
+                  buildButton("00"),
+                  buildButton("+"),
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
+              Row(
+                children: <Widget>[
+                  buildButton("CLEAR"),
+                  buildButton("="),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
