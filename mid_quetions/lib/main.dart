@@ -16,16 +16,30 @@ class SignUpPage extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
+  @override
   MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<Home> {
-  final key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? name, password, email, gender, dob;
   TextEditingController _dobController = TextEditingController();
+
+  // Function to submit the form
   void submitForm() {
-    if (key.currentState!.validate()) {
-      key.currentState!.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailScreen(
+            email: email!,
+            dob: dob!,
+            name: name!,
+            gender: gender!,
+          ),
+        ),
+      );
     }
   }
 
@@ -33,7 +47,7 @@ class MyAppState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up form'),
+        title: Text('Sign Up Form'),
         backgroundColor: Colors.teal,
         centerTitle: true,
       ),
@@ -41,9 +55,10 @@ class MyAppState extends State<Home> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Form(
-          key: key,
+          key: _formKey,
           child: Column(
             children: [
+              // Name Field
               TextFormField(
                 decoration: InputDecoration(
                     label: Text('Name'), border: OutlineInputBorder()),
@@ -54,80 +69,105 @@ class MyAppState extends State<Home> {
                   return null;
                 },
                 onSaved: (value) {
-                  name == value;
+                  name = value;
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
+
+              // Email Field
               TextFormField(
                 decoration: InputDecoration(
                     label: Text('Email'), border: OutlineInputBorder()),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty || !value.contains('@')) {
                     return 'Enter Valid Email Address';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  email == value;
+                  email = value;
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
+
+              // Password Field
               TextFormField(
                 decoration: InputDecoration(
                     label: Text('Password'), border: OutlineInputBorder()),
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length <= 5) {
-                    return 'Password must of at least 6 digits';
+                    return 'Password must be at least 6 characters';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  password == value;
+                  password = value;
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: Text('Name'), border: OutlineInputBorder()),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter Name';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  name == value;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                    label: Text('Name'), border: OutlineInputBorder()),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter Name';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  name == value;
-                },
-              ),
-              SizedBox(
-                height: 10,
+              SizedBox(height: 10),
 
+              // Date of Birth Field
+              TextFormField(
+                controller: _dobController,
+                decoration: InputDecoration(
+                    label: Text('Date Of Birth'), border: OutlineInputBorder()),
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null) {
+                    _dobController.text =
+                    "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                    dob = _dobController.text;
+                  }
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter Date of Birth';
+                  }
+                  return null;
+                },
               ),
-              ElevatedButton(onPressed: submitForm, child: Text('Submit Form',style: TextStyle(color: Colors.black),),style: ElevatedButton.styleFrom(backgroundColor: Colors.white),)
+              SizedBox(height: 10),
+
+              // Gender Dropdown
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                    label: Text('Select Gender'), border: OutlineInputBorder()),
+                items: ['Male', 'Female', 'Prefer not to say']
+                    .map((label) => DropdownMenuItem(
+                  child: Text(label),
+                  value: label,
+                ))
+                    .toList(),
+                onChanged: (value) => gender = value,
+                validator: (value) {
+                  if (value == null) {
+                    return 'Select Gender';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 10),
+
+              // Submit Button
+              ElevatedButton(
+                onPressed: submitForm,
+                child: Text(
+                  'Submit Form',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                ),
+              )
             ],
           ),
         ),
@@ -136,179 +176,39 @@ class MyAppState extends State<Home> {
   }
 }
 
-// import 'package:flutter/material.dart';
-//
-// void main() => runApp(SignUpApp());
-//
-// class SignUpApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Sign Up Form',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: SignUpScreen(),
-//     );
-//   }
-// }
-//
-// class SignUpScreen extends StatefulWidget {
-//   @override
-//   _SignUpScreenState createState() => _SignUpScreenState();
-// }
-//
-// class _SignUpScreenState extends State<SignUpScreen> {
-//   final _formKey = GlobalKey<FormState>();
-//   String? _email, _password, _dob, _gender;
-//   TextEditingController _dobController = TextEditingController();
-//
-//   // Function to submit the form
-//   void _submitForm() {
-//     if (_formKey.currentState!.validate()) {
-//       _formKey.currentState!.save();
-//       Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => DetailsScreen(
-//             email: _email!,
-//             dob: _dob!,
-//             gender: _gender!,
-//           ),
-//         ),
-//       );
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Sign Up')),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Form(
-//           key: _formKey,
-//           child: SingleChildScrollView(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: <Widget>[
-//                 // Email
-//                 TextFormField(
-//                   decoration: InputDecoration(labelText: 'Email'),
-//                   keyboardType: TextInputType.emailAddress,
-//                   validator: (value) {
-//                     if (value == null || value.isEmpty || !value.contains('@')) {
-//                       return 'Please enter a valid email';
-//                     }
-//                     return null;
-//                   },
-//                   onSaved: (value) => _email = value,
-//                 ),
-//                 SizedBox(height: 16),
-//
-//                 // Password
-//                 TextFormField(
-//                   decoration: InputDecoration(labelText: 'Password'),
-//                   obscureText: true,
-//                   validator: (value) {
-//                     if (value == null || value.length < 6) {
-//                       return 'Password must be at least 6 characters';
-//                     }
-//                     return null;
-//                   },
-//                   onSaved: (value) => _password = value,
-//                 ),
-//                 SizedBox(height: 16),
-//
-//                 // Date of Birth
-//                 TextFormField(
-//                   controller: _dobController,
-//                   decoration: InputDecoration(labelText: 'Date of Birth'),
-//                   onTap: () async {
-//                     FocusScope.of(context).requestFocus(FocusNode());
-//                     DateTime? pickedDate = await showDatePicker(
-//                       context: context,
-//                       initialDate: DateTime.now(),
-//                       firstDate: DateTime(1900),
-//                       lastDate: DateTime.now(),
-//                     );
-//                     if (pickedDate != null) {
-//                       _dobController.text =
-//                       "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-//                       _dob = _dobController.text;
-//                     }
-//                   },
-//                   validator: (value) {
-//                     if (value == null || value.isEmpty) {
-//                       return 'Please select your date of birth';
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//                 SizedBox(height: 16),
-//
-//                 // Gender
-//                 DropdownButtonFormField<String>(
-//                   decoration: InputDecoration(labelText: 'Gender'),
-//                   items: ['Male', 'Female', 'Other']
-//                       .map((label) => DropdownMenuItem(
-//                     child: Text(label),
-//                     value: label,
-//                   ))
-//                       .toList(),
-//                   onChanged: (value) => _gender = value,
-//                   validator: (value) {
-//                     if (value == null) {
-//                       return 'Please select your gender';
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//                 SizedBox(height: 16),
-//
-//                 // Submit Button
-//                 Center(
-//                   child: ElevatedButton(
-//                     onPressed: _submitForm,
-//                     child: Text('Sign Up'),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// // Screen to display user details after sign up
-// class DetailsScreen extends StatelessWidget {
-//   final String email, dob, gender;
-//
-//   DetailsScreen({
-//     required this.email,
-//     required this.dob,
-//     required this.gender,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('User Details')),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Text('Email: $email'),
-//             SizedBox(height: 10),
-//             Text('Date of Birth: $dob'),
-//             SizedBox(height: 10),
-//             Text('Gender: $gender'),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+// Screen to show user details
+class DetailScreen extends StatelessWidget {
+  final String name, email, dob, gender;
+
+  DetailScreen({
+    required this.name,
+    required this.email,
+    required this.dob,
+    required this.gender,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('User Details'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name: $name'),
+            SizedBox(height: 10),
+            Text('Email: $email'),
+            SizedBox(height: 10),
+            Text('Date of Birth: $dob'),
+            SizedBox(height: 10),
+            Text('Gender: $gender'),
+          ],
+        ),
+      ),
+    );
+  }
+}
